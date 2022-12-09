@@ -142,29 +142,36 @@ class GameScene {
         subtitle.setFont(Font.font(50));
         subtitle.relocate(150, 200);
 
-        TextField username = new TextField("Username");
-
+        TextField username_input = new TextField("Username");
+        username_input.relocate(375, 450);
+        username_input.setPrefSize(150, 30);
+        root.getChildren().add(username_input);
 
 
 
         Button startButton = new Button("START");
         startButton.setPrefSize(200,50);
-        startButton.setTextFill(Color.PINK);
+        startButton.setTextFill(Color.BLUE);
         root.getChildren().add(startButton);
         startButton.relocate(350,500);
         startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                String username = username_input.getText();
                 root.getChildren().clear();
-                game(gameScene, root, primaryStage, endGameScene, endGameRoot);
+                game(gameScene, root, primaryStage, endGameScene, endGameRoot, username);
             }
         });
 
 
     }
 
-    void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot) {
+    void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot, String username) {
         this.root = root;
+
+        if(username.equals("Username")){
+            username = "Guest";
+        }
 
 
 
@@ -181,7 +188,11 @@ class GameScene {
         getEmptyCells(1);
 
 
-
+        Text username_text = new Text();
+        root.getChildren().add(username_text);
+        username_text.setText(username);
+        username_text.setFont(Font.font(25));
+        username_text.relocate(750, 50);
         Text text = new Text();
         root.getChildren().add(text);
         text.setText("SCORE :");
@@ -194,7 +205,7 @@ class GameScene {
         scoreText.setText("0");
 
 
-
+        String finalUsername = username;
         gameScene.addEventHandler(KeyEvent.KEY_PRESSED, key ->{
             Platform.runLater(() -> {
                 int haveEmptyCell;
@@ -214,7 +225,7 @@ class GameScene {
                     if (Movement.canNotMove(cells)) {
                         primaryStage.setScene(endGameScene);
 
-                        EndGame.getInstance().endGameShow(endGameScene, endGameRoot, primaryStage, score);
+                        EndGame.getInstance().endGameShow(endGameScene, endGameRoot, primaryStage, score, finalUsername);
                         root.getChildren().clear();
                         score = 0;
                     }

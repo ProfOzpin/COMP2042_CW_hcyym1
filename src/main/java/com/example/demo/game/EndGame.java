@@ -31,7 +31,7 @@ public class EndGame {
         return singleInstance;
     }
 
-    public void endGameShow(Scene endGameScene, Group root, Stage primaryStage,long score){
+    public void endGameShow(Scene endGameScene, Group root, Stage primaryStage,long score, String username){
         Text text = new Text("GAME OVER");
         text.relocate(250,250);
 
