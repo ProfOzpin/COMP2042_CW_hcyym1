@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Optional;
 import java.util.Scanner;
@@ -35,6 +34,7 @@ public class EndGame {
     public void endGameShow(Scene endGameScene, Group root, Stage primaryStage,long score){
         Text text = new Text("GAME OVER");
         text.relocate(250,250);
+
         text.setFont(Font.font(80));
         root.getChildren().add(text);
 
@@ -105,11 +105,6 @@ public class EndGame {
                 e.printStackTrace();
             }
         }
-
-
-
-
-
 
     }
 }

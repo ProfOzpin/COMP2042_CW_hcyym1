@@ -1,8 +1,8 @@
 package com.example.demo.user;
-
 import java.util.ArrayList;
 
 public class Account implements Comparable<Account> {
+
     private long score = 0;
     private String userName ;
     private static ArrayList<Account> accounts = new ArrayList<>();

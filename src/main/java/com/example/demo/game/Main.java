@@ -60,7 +60,7 @@ public class Main extends Application {
         setGameScene(gameScene);
         primaryStage.setScene(gameScene);
         GameScene game = new GameScene();
-        game.game(gameScene, gameRoot, primaryStage, endGameScene, endgameRoot);
+        game.main_menu(gameScene, gameRoot, primaryStage, endGameScene, endgameRoot);
 
         primaryStage.show();
     }

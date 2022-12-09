@@ -2,14 +2,22 @@ package com.example.demo.game;
 
 import com.example.demo.game.TextMaker;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Optional;
 import java.util.Random;
 
 class GameScene {
@@ -118,8 +126,49 @@ class GameScene {
         }
     }
 
+    void main_menu(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot) {
+        this.root = root;
+
+
+        Text title = new Text();
+        root.getChildren().add(title);
+        title.setText("2048");
+        title.setFont(Font.font(100));
+        title.relocate(340, 100);
+
+        Text subtitle = new Text();
+        root.getChildren().add(subtitle);
+        subtitle.setText("Prepared by Youssef Mohamed");
+        subtitle.setFont(Font.font(50));
+        subtitle.relocate(150, 200);
+
+        TextField username = new TextField("Username");
+
+
+
+
+        Button startButton = new Button("START");
+        startButton.setPrefSize(200,50);
+        startButton.setTextFill(Color.PINK);
+        root.getChildren().add(startButton);
+        startButton.relocate(350,500);
+        startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                root.getChildren().clear();
+                game(gameScene, root, primaryStage, endGameScene, endGameRoot);
+            }
+        });
+
+
+    }
+
     void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot) {
         this.root = root;
+
+
+
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 cells[i][j] = new Cell((j) * LENGTH + (j + 1) * distanceBetweenCells,
@@ -127,6 +176,11 @@ class GameScene {
             }
 
         }
+
+        getEmptyCells(1);
+        getEmptyCells(1);
+
+
 
         Text text = new Text();
         root.getChildren().add(text);
@@ -139,35 +193,37 @@ class GameScene {
         scoreText.setFont(Font.font(20));
         scoreText.setText("0");
 
-        getEmptyCells(1);
-        getEmptyCells(1);
+
 
         gameScene.addEventHandler(KeyEvent.KEY_PRESSED, key ->{
-                Platform.runLater(() -> {
-                    int haveEmptyCell;
-                    if (key.getCode() == KeyCode.DOWN) {
-                        Movement.moveDown(cells);
-                    } else if (key.getCode() == KeyCode.UP) {
-                        Movement.moveUp(cells);
-                    } else if (key.getCode() == KeyCode.LEFT) {
-                        Movement.moveLeft(cells);
-                    } else if (key.getCode() == KeyCode.RIGHT) {
-                        Movement.moveRight(cells);
-                    }
-                    GameScene.this.sumCellNumbersToScore();
-                    scoreText.setText(score + "");
-                    haveEmptyCell = GameScene.this.haveEmptyCell();
-                    if (haveEmptyCell == -1) {
-                        if (Movement.canNotMove(cells)) {
-                            primaryStage.setScene(endGameScene);
+            Platform.runLater(() -> {
+                int haveEmptyCell;
+                if (key.getCode() == KeyCode.DOWN) {
+                    Movement.moveDown(cells);
+                } else if (key.getCode() == KeyCode.UP) {
+                    Movement.moveUp(cells);
+                } else if (key.getCode() == KeyCode.LEFT) {
+                    Movement.moveLeft(cells);
+                } else if (key.getCode() == KeyCode.RIGHT) {
+                    Movement.moveRight(cells);
+                }
+                GameScene.this.sumCellNumbersToScore();
+                scoreText.setText(score + "");
+                haveEmptyCell = GameScene.this.haveEmptyCell();
+                if (haveEmptyCell == -1) {
+                    if (Movement.canNotMove(cells)) {
+                        primaryStage.setScene(endGameScene);
 
-                            EndGame.getInstance().endGameShow(endGameScene, endGameRoot, primaryStage, score);
-                            root.getChildren().clear();
-                            score = 0;
-                        }
-                    } else if(haveEmptyCell == 1)
-                        GameScene.this.getEmptyCells(2);
-                });
+                        EndGame.getInstance().endGameShow(endGameScene, endGameRoot, primaryStage, score);
+                        root.getChildren().clear();
+                        score = 0;
+                    }
+                } else if(haveEmptyCell == 1)
+                    GameScene.this.getEmptyCells(2);
             });
+        });
+
+
+
     }
 }
