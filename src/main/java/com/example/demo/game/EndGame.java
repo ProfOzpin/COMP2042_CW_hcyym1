@@ -56,12 +56,17 @@ public class EndGame {
         highscore_alert.setFont(Font.font(80));
         root.getChildren().add(highscore_alert);
 
+        Text unregistered_alert = new Text("");
+        unregistered_alert.setFill(Color.BLACK);
+        unregistered_alert.relocate(100,550);
+        unregistered_alert.setFont(Font.font(30));
+        root.getChildren().add(unregistered_alert);
 
         Button quitButton = new Button("QUIT");
         quitButton.setPrefSize(100,30);
         quitButton.setTextFill(Color.PINK);
         root.getChildren().add(quitButton);
-        quitButton.relocate(100,800);
+        quitButton.relocate(420,650);
         quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -77,34 +82,62 @@ public class EndGame {
             }
         });
 
-        long stored_highscore = 0;
-        String line = "";
-        File obj = new File("src/main/java/com/example/demo/game/highscore.txt");
-        try {
-            Scanner scanner = new Scanner(obj);
-            line = scanner.nextLine();
-            stored_highscore = Long.parseLong(line);
-            scanner.close();
-            highscore.setText("Highscore: "+stored_highscore);
 
+        if(!username.equals("Guest")){
+            long stored_highscore = 0;
+            String line = "";
+            String[] split_line;
+            File obj = new File("src/main/java/com/example/demo/game/highscore.txt");
+            String total_string = "";
+            boolean found = false;
+            try {
+                Scanner scanner = new Scanner(obj);
+                while(scanner.hasNextLine()){
+                    line = scanner.nextLine();
+                    split_line = line.split("\\s");
+                    if(split_line[0].equals(username)){
+                        stored_highscore = Long.parseLong(split_line[1]);
+                        highscore.setText("Highscore: "+stored_highscore);
+                        found = true;
+                        if(score > stored_highscore){
+                            total_string += username + " " + stored_highscore + "\n";
+                            highscore_alert.setText("New Highscore!");
 
+                        }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+                    } else {
+                        total_string += line + "\n";
+                        highscore_alert.setFont(Font.font(30));
+                        highscore_alert.setText("Not a new highscore, better luck next time!");
+                    }
 
-        if(score > stored_highscore){
+                }
+                scanner.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            if(found == false){
+                total_string += username + " " + score + "\n";
+                highscore_alert.setText("New Highscore!");
+
+            }
+
             try {
 
                 FileWriter writer = new FileWriter(obj, false);
-                writer.write(Long.toString(score));
+                writer.write(total_string);
                 writer.flush();
                 writer.close();
-                highscore_alert.setText("New Highscore!");
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+
+        } else {
+            unregistered_alert.setText("You are not a registered user.\nPlease insert username next time to save your highscores!");
         }
+
 
     }
 }

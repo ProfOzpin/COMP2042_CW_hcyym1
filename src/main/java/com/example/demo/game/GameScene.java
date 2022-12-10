@@ -169,7 +169,8 @@ class GameScene {
     void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot, String username) {
         this.root = root;
 
-        if(username.equals("Username")){
+        username.replaceAll("\\s","");
+        if(username.equals("Username")) {
             username = "Guest";
         }
 

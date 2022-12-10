@@ -1,13 +1,18 @@
 package com.example.demo.game;
 
-
+import com.example.demo.game.Colours;
 import com.example.demo.game.TextMaker;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class Cell {
+import java.util.HashMap;
+
+public class Cell{
+
+    private Colours colours = new Colours();
+
     private Rectangle rectangle;
     private Group root;
     private Text textClass;
@@ -61,46 +66,8 @@ public class Cell {
     }
 
     void setColorByNumber(int number) {
-        switch (number) {
-            case 0:
-                rectangle.setFill(Color.rgb(224, 226, 226, 0.5));
-                break;
-            case 2:
-                rectangle.setFill(Color.rgb(232, 255, 100, 0.5));
-                break;
-            case 4:
-                rectangle.setFill(Color.rgb(232, 220, 50, 0.5));
-                break;
-            case 8:
-                rectangle.setFill(Color.rgb(232, 200, 44, 0.8));
-                break;
-            case 16:
-                rectangle.setFill(Color.rgb(232, 170, 44, 0.8));
-                break;
-            case 32:
-                rectangle.setFill(Color.rgb(180, 120, 44, 0.7));
-                break;
-            case 64:
-                rectangle.setFill(Color.rgb(180, 100, 44, 0.7));
-                break;
-            case 128:
-                rectangle.setFill(Color.rgb(180, 80, 44, 0.7));
-                break;
-            case 256:
-                rectangle.setFill(Color.rgb(180, 60, 44, 0.8));
-                break;
-            case 512:
-                rectangle.setFill(Color.rgb(180, 30, 44, 0.8));
-                break;
-            case 1024:
-                rectangle.setFill(Color.rgb(250, 0, 44, 0.8));
-                break;
-            case 2048:
-                rectangle.setFill(Color.rgb(250,0,0,1));
-
-
-        }
-
+        Double[] parameters = colours.initialize_colours().get(number);
+        rectangle.setFill(Color.rgb(parameters[0].intValue(), parameters[1].intValue(), parameters[2].intValue(), parameters[3]));
     }
 
     double getX() {
