@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class Cell{
 
-    private Colours colours = new Colours();
+    Colours colours = new Colours();
 
     private Rectangle rectangle;
     private Group root;
@@ -65,8 +65,10 @@ public class Cell{
         setColorByNumber(getNumber());
     }
 
-    void setColorByNumber(int number) {
-        Double[] parameters = colours.initialize_colours().get(number);
+
+    public void setColorByNumber(int number) {
+
+        Double[] parameters = colours.get_colours().get(number);
         rectangle.setFill(Color.rgb(parameters[0].intValue(), parameters[1].intValue(), parameters[2].intValue(), parameters[3]));
     }
 

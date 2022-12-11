@@ -56,11 +56,12 @@ public class Main extends Application {
 
         Group gameRoot = new Group();
         setGameRoot(gameRoot);
-        Scene gameScene = new Scene(gameRoot, WIDTH, HEIGHT, Color.rgb(189, 177, 92));
+        Scene gameScene = new Scene(gameRoot, WIDTH, HEIGHT, Color.rgb(100, 200, 200));
         setGameScene(gameScene);
         primaryStage.setScene(gameScene);
         GameScene game = new GameScene();
         game.main_menu(gameScene, gameRoot, primaryStage, endGameScene, endgameRoot);
+
 
         primaryStage.show();
     }

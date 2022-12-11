@@ -64,9 +64,9 @@ public class EndGame {
 
         Button quitButton = new Button("QUIT");
         quitButton.setPrefSize(100,30);
-        quitButton.setTextFill(Color.PINK);
+        quitButton.setTextFill(Color.BLUE);
         root.getChildren().add(quitButton);
-        quitButton.relocate(420,650);
+        quitButton.relocate(350,650);
         quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -75,12 +75,33 @@ public class EndGame {
                 alert.setHeaderText("Quit from this page");
                 alert.setContentText("Are you sure?");
 
+
+
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK){
                     root.getChildren().clear();
                 }
             }
         });
+
+        Button retryButton = new Button("RETRY");
+        retryButton.setPrefSize(100,30);
+        retryButton.setTextFill(Color.BLUE);
+        root.getChildren().add(retryButton);
+        retryButton.relocate(470,650);
+        retryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Main main = new Main();
+                try {
+                    main.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
 
 
         if(!username.equals("Guest")){

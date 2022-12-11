@@ -1,5 +1,5 @@
 package com.example.demo.game;
-
+import javafx.scene.transform.Rotate;
 import com.example.demo.game.TextMaker;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -16,7 +16,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.util.Optional;
 import java.util.Random;
 
@@ -29,6 +28,8 @@ class GameScene {
     private Cell[][] cells = new Cell[n][n];
     private Group root;
     private long score = 0;
+    Colours colours = new Colours();
+    boolean initialized_colours = false;
 
     static void setN(int number) {
         n = number;
@@ -111,13 +112,6 @@ class GameScene {
 
 
 
-
-
-
-
-
-
-
     private void sumCellNumbersToScore() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -128,6 +122,11 @@ class GameScene {
 
     void main_menu(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot) {
         this.root = root;
+
+        Colours.initialize_colours();
+
+
+        Random random = new Random();
 
 
         Text title = new Text();
@@ -163,8 +162,24 @@ class GameScene {
             }
         });
 
+        Button colourButton = new Button("CHANGE COLOUR");
+        colourButton.setPrefSize(200,50);
+        colourButton.setTextFill(Color.BLUE);
+        root.getChildren().add(colourButton);
+        colourButton.relocate(350,600);
+        colourButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                gameScene.setFill(Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+                Colours.remap_colours();
+            }
+        });
+
 
     }
+
+
+
 
     void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot, String username) {
         this.root = root;
@@ -189,11 +204,14 @@ class GameScene {
         getEmptyCells(1);
 
 
+
+
         Text username_text = new Text();
         root.getChildren().add(username_text);
         username_text.setText(username);
         username_text.setFont(Font.font(25));
         username_text.relocate(750, 50);
+
         Text text = new Text();
         root.getChildren().add(text);
         text.setText("SCORE :");
@@ -206,7 +224,10 @@ class GameScene {
         scoreText.setText("0");
 
 
+
+
         String finalUsername = username;
+
         gameScene.addEventHandler(KeyEvent.KEY_PRESSED, key ->{
             Platform.runLater(() -> {
                 int haveEmptyCell;
