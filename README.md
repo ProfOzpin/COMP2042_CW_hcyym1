@@ -20,4 +20,4 @@ Movement class.
 Colours class.
 
 Modified classes:
-Cell, EndGame, Main, GameScene
+Cell, EndGame, Main, GameScene, Account
