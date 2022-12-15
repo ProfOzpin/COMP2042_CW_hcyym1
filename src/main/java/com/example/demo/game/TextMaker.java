@@ -1,10 +1,13 @@
 package com.example.demo.game;
-
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * TextMaker class. Not modified.
+ * @author Youssef Mohamed-modified
+ */
 class TextMaker {
     private static TextMaker singleInstance = null;
 

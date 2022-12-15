@@ -1,4 +1,5 @@
 package com.example.demo.game;
+import com.example.demo.user.Account;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -13,11 +14,14 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.FileWriter;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-
+/**
+ * EndGame class. Modified to show the users highscore, and indicate if new highscore.
+ * @author Youssef Mohamed-modified
+ */
 public class EndGame {
 
 
@@ -32,6 +36,8 @@ public class EndGame {
     }
 
     public void endGameShow(Scene endGameScene, Group root, Stage primaryStage,long score, String username){
+        Account account_handler = new Account();
+
         Text text = new Text("GAME OVER");
         text.relocate(250,250);
 
@@ -101,62 +107,23 @@ public class EndGame {
             }
         });
 
-
-
-
         if(!username.equals("Guest")){
-            long stored_highscore = 0;
-            String line = "";
-            String[] split_line;
-            File obj = new File("src/main/java/com/example/demo/game/highscore.txt");
-            String total_string = "";
-            boolean found = false;
-            try {
-                Scanner scanner = new Scanner(obj);
-                while(scanner.hasNextLine()){
-                    line = scanner.nextLine();
-                    split_line = line.split("\\s");
-                    if(split_line[0].equals(username)){
-                        stored_highscore = Long.parseLong(split_line[1]);
-                        highscore.setText("Highscore: "+stored_highscore);
-                        found = true;
-                        if(score > stored_highscore){
-                            total_string += username + " " + stored_highscore + "\n";
-                            highscore_alert.setText("New Highscore!");
+            List<?> result = account_handler.score_Compare(username, score);
 
-                        }
-
-                    } else {
-                        total_string += line + "\n";
-                        highscore_alert.setFont(Font.font(30));
-                        highscore_alert.setText("Not a new highscore, better luck next time!");
-                    }
-
+            if((boolean) result.get(2)){
+                highscore.setText("Highscore: "+ result.get(1));
+                if((boolean) result.get(0)){
+                    highscore_alert.setText("New Highscore!");
+                } else {
+                    highscore_alert.setFont(Font.font(30));
+                    highscore_alert.setText("Not a new highscore, better luck next time!");
                 }
-                scanner.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            if(found == false){
-                total_string += username + " " + score + "\n";
+            } else {
                 highscore_alert.setText("New Highscore!");
-
-            }
-
-            try {
-
-                FileWriter writer = new FileWriter(obj, false);
-                writer.write(total_string);
-                writer.flush();
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+                highscore.setText("Highscore: "+ score);
             }
 
 
-        } else {
-            unregistered_alert.setText("You are not a registered user.\nPlease insert username next time to save your highscores!");
         }
 
 

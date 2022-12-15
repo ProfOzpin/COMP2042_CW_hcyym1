@@ -1,8 +1,11 @@
 package com.example.demo.game;
 
-
+/**
+ * The movement class. Stores all movement related functions from GameScene.
+ * @author Youssef Mohamed
+ */
 public class Movement {
-    private static int n = 4;
+    private static final int n = 4;
 
     public static void moveLeft(Cell[][] cells) {
         for (int i = 0; i < n; i++) {
@@ -114,10 +117,8 @@ public class Movement {
 
     public static boolean isValidDesH(int i, int j, int des, int sign, Cell[][] cells) {
         if (des + sign < n && des + sign >= 0) {
-            if (cells[i][des + sign].getNumber() == cells[i][j].getNumber() && !cells[i][des + sign].getModify()
-                    && cells[i][des + sign].getNumber() != 0) {
-                return true;
-            }
+            return cells[i][des + sign].getNumber() == cells[i][j].getNumber() && !cells[i][des + sign].getModify()
+                    && cells[i][des + sign].getNumber() != 0;
         }
         return false;
     }
@@ -126,10 +127,8 @@ public class Movement {
 
     public static boolean isValidDesV(int i, int j, int des, int sign, Cell[][] cells) {
         if (des + sign < n && des + sign >= 0)
-            if (cells[des + sign][j].getNumber() == cells[i][j].getNumber() && !cells[des + sign][j].getModify()
-                    && cells[des + sign][j].getNumber() != 0) {
-                return true;
-            }
+            return cells[des + sign][j].getNumber() == cells[i][j].getNumber() && !cells[des + sign][j].getModify()
+                    && cells[des + sign][j].getNumber() != 0;
         return false;
     }
 
@@ -157,8 +156,7 @@ public class Movement {
         if (i < n - 1 && j < n - 1) {
             if (cells[i + 1][j].getNumber() == cells[i][j].getNumber())
                 return true;
-            if (cells[i][j + 1].getNumber() == cells[i][j].getNumber())
-                return true;
+            return cells[i][j + 1].getNumber() == cells[i][j].getNumber();
         }
         return false;
     }

@@ -2,6 +2,10 @@ package com.example.demo.game;
 import java.util.*;
 import java.util.Random;
 
+/**
+ * The Colours class. Contains hashmap which contains the colours for the cells.
+ * @author Youssef Mohamed
+ */
 public class Colours {
     static HashMap<Integer, Double[]> colours= new HashMap<>();//Creating HashMap
     static Random random = new Random();
@@ -32,9 +36,9 @@ public class Colours {
         int val_3 = random.nextInt(35);
         for(int i = 2; i <= 2048; i = i * 2){
             colours.put(i, new Double[] {Double.valueOf(val_1), Double.valueOf(val_2), Double.valueOf(val_3), random.nextDouble()});
-            val_1 += random.nextInt(20);
-            val_2 += random.nextInt(20);
-            val_3 += random.nextInt(20);
+            val_1 += 20;
+            val_2 += 20;
+            val_3 += 20;
         }
         return colours;
     }

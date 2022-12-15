@@ -1,6 +1,4 @@
 package com.example.demo.game;
-
-import com.example.demo.game.GameScene;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -9,15 +7,18 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
-
 import java.util.Scanner;
 
+/**
+ * The Main class. Modified to initialize colours, and redirect to main menu instead of directly to game.
+ * @author Youssef Mohamed-modified
+ */
 public class Main extends Application {
     static final int WIDTH = 900;
     static final int HEIGHT = 900;
     private Group gameRoot = new Group();
     private Scene gameScene = new Scene(gameRoot, WIDTH, HEIGHT, Color.rgb(189, 177, 92));
-    private static Scanner input= new Scanner(System.in);
+    private static final Scanner input= new Scanner(System.in);
 
     public void setGameScene(Scene gameScene) {
         this.gameScene = gameScene;
@@ -60,6 +61,11 @@ public class Main extends Application {
         setGameScene(gameScene);
         primaryStage.setScene(gameScene);
         GameScene game = new GameScene();
+
+        // Initializes the colour theme hashmap in Colours class
+        Colours.initialize_colours();
+
+        //Changed, runs the main menu, instead of the game directly. Main Menu is in GameScene
         game.main_menu(gameScene, gameRoot, primaryStage, endGameScene, endgameRoot);
 
 

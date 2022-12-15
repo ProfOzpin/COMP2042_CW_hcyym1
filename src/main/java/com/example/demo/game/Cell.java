@@ -1,20 +1,18 @@
 package com.example.demo.game;
-
-import com.example.demo.game.Colours;
-import com.example.demo.game.TextMaker;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-import java.util.HashMap;
-
+/**
+ * The Cell class. Refactored with the help of the Colours class.
+ * @author Youssef Mohamed-modified
+ */
 public class Cell{
 
-    Colours colours = new Colours();
 
-    private Rectangle rectangle;
-    private Group root;
+    private final Rectangle rectangle;
+    private final Group root;
     private Text textClass;
     private boolean modify = false;
 
@@ -68,7 +66,7 @@ public class Cell{
 
     public void setColorByNumber(int number) {
 
-        Double[] parameters = colours.get_colours().get(number);
+        Double[] parameters = Colours.get_colours().get(number);
         rectangle.setFill(Color.rgb(parameters[0].intValue(), parameters[1].intValue(), parameters[2].intValue(), parameters[3]));
     }
 

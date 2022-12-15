@@ -1,14 +1,10 @@
 package com.example.demo.game;
-import javafx.scene.transform.Rotate;
-import com.example.demo.game.TextMaker;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -16,20 +12,21 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.util.Optional;
 import java.util.Random;
 
+/**
+ * The GameScene class. Modified to include main menu, and take users username.
+ * @author Youssef Mohamed-modified
+ */
 class GameScene {
-    private static int HEIGHT = 700;
+    private static final int HEIGHT = 700;
     private static int n = 4;
     private final static int distanceBetweenCells = 10;
     private static double LENGTH = (HEIGHT - ((n + 1) * distanceBetweenCells)) / (double) n;
-    private TextMaker textMaker = TextMaker.getSingleInstance();
-    private Cell[][] cells = new Cell[n][n];
+    private final TextMaker textMaker = TextMaker.getSingleInstance();
+    private final Cell[][] cells = new Cell[n][n];
     private Group root;
     private long score = 0;
-    Colours colours = new Colours();
-    boolean initialized_colours = false;
 
     static void setN(int number) {
         n = number;
@@ -74,9 +71,7 @@ class GameScene {
     private void fillCells(int aForBound, int bForBound, Cell[][] emptyCells){
         Text text;
         Random random = new Random();
-        boolean putTwo = true;
-        if (random.nextInt() % 2 == 0)
-            putTwo = false;
+        boolean putTwo = random.nextInt() % 2 != 0;
         int xCell, yCell;
         xCell = random.nextInt(aForBound+1);
         yCell = random.nextInt(bForBound+1);
@@ -123,7 +118,6 @@ class GameScene {
     void main_menu(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot) {
         this.root = root;
 
-        Colours.initialize_colours();
 
 
         Random random = new Random();
@@ -166,7 +160,7 @@ class GameScene {
         colourButton.setPrefSize(200,50);
         colourButton.setTextFill(Color.BLUE);
         root.getChildren().add(colourButton);
-        colourButton.relocate(350,600);
+        colourButton.relocate(350,560);
         colourButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
