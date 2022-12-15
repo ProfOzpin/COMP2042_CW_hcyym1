@@ -7,6 +7,10 @@ package com.example.demo.game;
 public class Movement {
     private static final int n = 4;
 
+    /**
+     * Unmodified
+     * @param cells
+     */
     public static void moveLeft(Cell[][] cells) {
         for (int i = 0; i < n; i++) {
             for (int j = 1; j < n; j++) {
@@ -18,6 +22,10 @@ public class Movement {
         }
     }
 
+    /**
+     * Unmodified
+     * @param cells
+     */
     public static void moveRight(Cell[][] cells) {
         for (int i = 0; i < n; i++) {
             for (int j = n - 1; j >= 0; j--) {
@@ -29,6 +37,10 @@ public class Movement {
         }
     }
 
+    /**
+     * Unmodified
+     * @param cells
+     */
     public static void moveUp(Cell[][] cells) {
         for (int j = 0; j < n; j++) {
             for (int i = 1; i < n; i++) {
@@ -41,6 +53,10 @@ public class Movement {
 
     }
 
+    /**
+     * Unmodified
+     * @param cells
+     */
     public static void moveDown(Cell[][] cells) {
         for (int j = 0; j < n; j++) {
             for (int i = n - 1; i >= 0; i--) {
@@ -53,6 +69,14 @@ public class Movement {
 
     }
 
+    /**
+     * Unmodified
+     * @param i
+     * @param j
+     * @param des
+     * @param sign
+     * @param cells
+     */
     public static void moveHorizontally(int i, int j, int des, int sign, Cell[][] cells) {
         if (isValidDesH(i, j, des, sign, cells)) {
             cells[i][j].adder(cells[i][des + sign]);
@@ -62,6 +86,14 @@ public class Movement {
         }
     }
 
+    /**
+     * Unmodified
+     * @param i
+     * @param j
+     * @param direct
+     * @param cells
+     * @return
+     */
     public static int passDestination(int i, int j, char direct, Cell[][] cells) {
         int coordinate = j;
         if (direct == 'l') {
@@ -115,6 +147,15 @@ public class Movement {
         return -1;
     }
 
+    /**
+     * Unmodified
+     * @param i
+     * @param j
+     * @param des
+     * @param sign
+     * @param cells
+     * @return
+     */
     public static boolean isValidDesH(int i, int j, int des, int sign, Cell[][] cells) {
         if (des + sign < n && des + sign >= 0) {
             return cells[i][des + sign].getNumber() == cells[i][j].getNumber() && !cells[i][des + sign].getModify()
@@ -124,7 +165,15 @@ public class Movement {
     }
 
 
-
+    /**
+     * Unmodified
+     * @param i
+     * @param j
+     * @param des
+     * @param sign
+     * @param cells
+     * @return
+     */
     public static boolean isValidDesV(int i, int j, int des, int sign, Cell[][] cells) {
         if (des + sign < n && des + sign >= 0)
             return cells[des + sign][j].getNumber() == cells[i][j].getNumber() && !cells[des + sign][j].getModify()
@@ -132,6 +181,14 @@ public class Movement {
         return false;
     }
 
+    /**
+     * Unmodified
+     * @param i
+     * @param j
+     * @param des
+     * @param sign
+     * @param cells
+     */
     public static void moveVertically(int i, int j, int des, int sign, Cell[][] cells) {
         if (isValidDesV(i, j, des, sign, cells)) {
             cells[i][j].adder(cells[des + sign][j]);
@@ -141,6 +198,11 @@ public class Movement {
         }
     }
 
+    /**
+     * Unmodified
+     * @param cells
+     * @return
+     */
     public static boolean canNotMove(Cell[][] cells) {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -152,6 +214,13 @@ public class Movement {
         return true;
     }
 
+    /**
+     * Unmodified
+     * @param i
+     * @param j
+     * @param cells
+     * @return
+     */
     public static boolean haveSameNumberNearly(int i, int j, Cell[][] cells) {
         if (i < n - 1 && j < n - 1) {
             if (cells[i + 1][j].getNumber() == cells[i][j].getNumber())

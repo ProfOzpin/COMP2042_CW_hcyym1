@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.util.Random;
 
 /**
- * The GameScene class. Modified to include main menu, and take users username.
+ * The GameScene class, Modified to include main menu, and take users username, and refactored by removing the movement functions into the Movement class.
  * @author Youssef Mohamed-modified
  */
 class GameScene {
@@ -28,17 +28,27 @@ class GameScene {
     private Group root;
     private long score = 0;
 
+    /**
+     * Unmodified
+     * @param number
+     */
     static void setN(int number) {
         n = number;
         LENGTH = (HEIGHT - ((n + 1) * distanceBetweenCells)) / (double) n;
     }
 
+    /**
+     * Unmodified
+     * @return
+     */
     static double getLENGTH() {
         return LENGTH;
     }
 
-
-
+    /**
+     * Unmodified
+     * @param turn
+     */
     private void getEmptyCells(int turn) {
 
         Cell[][] emptyCells = new Cell[n][n];
@@ -68,6 +78,12 @@ class GameScene {
         fillCells(aForBound, bForBound, emptyCells);
     }
 
+    /**
+     * Unmodified
+     * @param aForBound
+     * @param bForBound
+     * @param emptyCells
+     */
     private void fillCells(int aForBound, int bForBound, Cell[][] emptyCells){
         Text text;
         Random random = new Random();
@@ -88,6 +104,10 @@ class GameScene {
         }
     }
 
+    /**
+     * Unmodified
+     * @return
+     */
     private int  haveEmptyCell() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -100,13 +120,9 @@ class GameScene {
         return -1;
     }
 
-
-
-
-
-
-
-
+    /**
+     * Unmodified
+     */
     private void sumCellNumbersToScore() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -115,6 +131,17 @@ class GameScene {
         }
     }
 
+    /**
+     * New class. Used as a main menu.
+     * Has a start menu, the change colour theme button, which calls the Colours class to use remap_colours().
+     * Also has a text field to store the username, which is sent to EndGame as a parameter.
+     * @author Youssef Mohamed
+     * @param gameScene
+     * @param root
+     * @param primaryStage
+     * @param endGameScene
+     * @param endGameRoot
+     */
     void main_menu(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot) {
         this.root = root;
 
@@ -173,8 +200,16 @@ class GameScene {
     }
 
 
-
-
+    /**
+     * Modified to send over the username.
+     * Uses the Movement class to register movement, instead of holding all the functions in this class.
+     * @param gameScene
+     * @param root
+     * @param primaryStage
+     * @param endGameScene
+     * @param endGameRoot
+     * @param username
+     */
     void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot, String username) {
         this.root = root;
 

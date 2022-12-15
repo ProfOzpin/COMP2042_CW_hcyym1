@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.Scanner;
 
 /**
- * The Main class. Modified to initialize colours, and redirect to main menu instead of directly to game.
+ * The Main class. Modified to initialize colours, and redirect to main menu instead of directly to game, in the start() function.
  * @author Youssef Mohamed-modified
  */
 public class Main extends Application {
@@ -20,14 +20,26 @@ public class Main extends Application {
     private Scene gameScene = new Scene(gameRoot, WIDTH, HEIGHT, Color.rgb(189, 177, 92));
     private static final Scanner input= new Scanner(System.in);
 
+    /**
+     * Unmodified
+     * @param gameScene
+     */
     public void setGameScene(Scene gameScene) {
         this.gameScene = gameScene;
     }
 
+    /**
+     * Unmodified
+     * @param gameRoot
+     */
     public void setGameRoot(Group gameRoot) {
         this.gameRoot = gameRoot;
     }
 
+
+    /**
+     * Modified to call main_menu() instead of game(), and initializes colours.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -72,6 +84,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Unmodified
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

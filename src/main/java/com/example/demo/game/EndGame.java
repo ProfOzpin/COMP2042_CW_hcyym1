@@ -19,22 +19,44 @@ import java.util.Optional;
 import java.util.Scanner;
 
 /**
- * EndGame class. Modified to show the users highscore, and indicate if new highscore.
+ * EndGame class, Modified to show the users highscore, and indicate if new highscore.
  * @author Youssef Mohamed-modified
  */
 public class EndGame {
 
 
     private static EndGame singleInstance = null;
+
+    /**
+     * Unmodified
+     */
     private EndGame(){
 
     }
+
+    /**
+     * Unmodified
+     * @return
+     */
     public static EndGame getInstance(){
         if(singleInstance == null)
             singleInstance= new EndGame();
         return singleInstance;
     }
 
+    /**
+     * Modified to add the highscore alerts. It also calls the Account class, in order to search for stored highscores.
+     * Using score_Compare from Account class, it checks for 4 differnet possibilies.
+     * 1, the account is a guest account, and will not have a saved highscore, and should enter a username next time.
+     * 2, it is a new user, as the username is not present in highscore.txt, and therefore it is automatcally a new highscore and is stored in the text file.
+     * 3, it a returning user and they have a new highscore, they are alerted accordingly.
+     * 4, it is a returning user and they have not achieved a new highscore, they are alerted accordingly.
+     * @param endGameScene
+     * @param root
+     * @param primaryStage
+     * @param score
+     * @param username
+     */
     public void endGameShow(Scene endGameScene, Group root, Stage primaryStage,long score, String username){
         Account account_handler = new Account();
 

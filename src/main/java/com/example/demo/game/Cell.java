@@ -5,7 +5,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 /**
- * The Cell class. Refactored with the help of the Colours class.
+ * The Cell class, Refactored with the help of the Colours class.
  * @author Youssef Mohamed-modified
  */
 public class Cell{
@@ -16,14 +16,29 @@ public class Cell{
     private Text textClass;
     private boolean modify = false;
 
+    /**
+     * Unmodified
+     * @param modify
+     */
     void setModify(boolean modify) {
         this.modify = modify;
     }
 
+    /**
+     * Unmodified
+     * @return modify
+     */
     boolean getModify() {
         return modify;
     }
 
+    /**
+     * Unmodified
+     * @param x
+     * @param y
+     * @param scale
+     * @param root
+     */
     Cell(double x, double y, double scale, Group root) {
         rectangle = new Rectangle();
         rectangle.setX(x);
@@ -36,10 +51,18 @@ public class Cell{
         root.getChildren().add(rectangle);
     }
 
+    /**
+     * Unmodified
+     * @param textClass
+     */
     void setTextClass(Text textClass) {
         this.textClass = textClass;
     }
 
+    /**
+     * Unmodified
+     * @param cell
+     */
     void changeCell(Cell cell) {
         TextMaker.changeTwoText(textClass, cell.getTextClass());
         root.getChildren().remove(cell.getTextClass());
@@ -55,6 +78,10 @@ public class Cell{
         cell.setColorByNumber(cell.getNumber());
     }
 
+    /**
+     * Unmodified
+     * @param cell
+     */
     void adder(Cell cell) {
         cell.getTextClass().setText((cell.getNumber() + this.getNumber()) + "");
         textClass.setText("0");
@@ -64,24 +91,46 @@ public class Cell{
     }
 
 
+    /**
+     * Modified, now uses the Colours hashmap to get the colours.
+     * Calls the Static Class Colours, using the method get_colours() to get the hashmap using the given number.
+     * get_colours() returns an array with 4 different values, for each value needed for the colours.
+     * @param number
+     */
     public void setColorByNumber(int number) {
 
         Double[] parameters = Colours.get_colours().get(number);
         rectangle.setFill(Color.rgb(parameters[0].intValue(), parameters[1].intValue(), parameters[2].intValue(), parameters[3]));
     }
 
+    /**
+     * Unmodified
+     * @return
+     */
     double getX() {
         return rectangle.getX();
     }
 
+    /**
+     * Unmodified
+     * @return
+     */
     double getY() {
         return rectangle.getY();
     }
 
+    /**
+     * Unmodified
+     * @return
+     */
     int getNumber() {
         return Integer.parseInt(textClass.getText());
     }
 
+    /**
+     * Unmodified
+     * @return
+     */
     private Text getTextClass() {
         return textClass;
     }
