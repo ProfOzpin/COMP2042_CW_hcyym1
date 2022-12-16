@@ -1,18 +1,14 @@
-Youssef Mohamed Abdelhamid Mohamed, 20398219
+# Youssef Mohamed Abdelhamid Mohamed, 20398219
 
 The code can be compiled but just adding the files into a project in Eclipse or Intellij, pointing it towards the main function in src/main/java/com/example/demo/game/Main or com.example.demo.game.Main.
 
 Javadocs are in "javadoc" folder, in the root folder.
 
 Implemented features:
-
-Randomized Colour themes.
-
-Highscore saving.
-
-Retry button.
-
-2048 Game Engine.
+-Randomized Colour themes.
+-Highscore saving.
+-Retry button.
+-2048 Game Engine.
 
 Non-implemented features:
 
