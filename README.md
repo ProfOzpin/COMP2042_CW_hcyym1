@@ -15,12 +15,17 @@ Retry button.
 2048 Game Engine.
 
 Non-implemented features:
+
 Unit tests. My mistake, starting working on refactoring before unit tests, made it too difficult to start working on them.
+
 Build files. Too difficult.
+
 Groundbreaking idea. No ideas on what to add, maybe the randomized colour theme could count.
 
 New classes:
+
 Movement class. It was made to contain all the movement functions in GameScene.
+
 Colours class. It was made to contain a hashmap for all the Colours, as well as randomize them to generate colour themes.
 
 Modified classes:
