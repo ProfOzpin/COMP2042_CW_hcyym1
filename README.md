@@ -5,10 +5,10 @@ The code can be compiled but just adding the files into a project in Eclipse or 
 Javadocs are in "javadoc" folder, in the root folder.
 
 Implemented features:
--Randomized Colour themes.
--Highscore saving.
--Retry button.
--2048 Game Engine.
+- Randomized Colour themes.
+- Highscore saving.
+- Retry button.
+- 2048 Game Engine.
 
 Non-implemented features:
 
