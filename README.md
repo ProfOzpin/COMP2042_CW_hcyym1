@@ -1,5 +1,7 @@
 # Youssef Mohamed Abdelhamid Mohamed, 20398219
 
+A refactoring project of given 2048 game project.
+
 The code can be compiled but just adding the files into a project in Eclipse or Intellij, pointing it towards the main function in src/main/java/com/example/demo/game/Main or com.example.demo.game.Main.
 
 Javadocs are in "javadoc" folder, in the root folder.
@@ -9,11 +11,6 @@ Javadocs are in "javadoc" folder, in the root folder.
 - Highscore saving.
 - Retry button.
 - 2048 Game Engine.
-
-## Non-implemented features:
-- Unit tests. My mistake, starting working on refactoring before unit tests, made it too difficult to start working on them.
-- Build files. Too difficult.
-- Groundbreaking idea. No ideas on what to add, maybe the randomized colour theme could count.
 
 ## New classes:
 - Movement class. It was made to contain all the movement functions in GameScene.
